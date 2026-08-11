@@ -13,7 +13,6 @@ export function TransactionForm({ categories, onSubmit }: Props) {
   const [type, setType] = useState<'income' | 'expense'>('expense');
   const [amount, setAmount] = useState('');
   const [categoryId, setCategoryId] = useState('');
-  const [date, setDate] = useState(todayISO());
   const [note, setNote] = useState('');
   const [saving, setSaving] = useState(false);
 
@@ -21,7 +20,6 @@ export function TransactionForm({ categories, onSubmit }: Props) {
   const expenseCategories = categories.filter((c) => !c.id.startsWith('income-'));
   const available = type === 'income' ? incomeCategories : expenseCategories;
 
-  // Si el usuario cambia de tipo y la categoría seleccionada no aplica, limpiar
   const currentCategory = available.find((c) => c.id === categoryId);
 
   async function handleSubmit(e: React.FormEvent) {
@@ -34,18 +32,17 @@ export function TransactionForm({ categories, onSubmit }: Props) {
       type,
       amount: Math.round(num * 100) / 100,
       categoryId: currentCategory.id,
-      date,
+      date: todayISO(),
       note: note.trim() || undefined,
     });
     setAmount('');
     setNote('');
+    setCategoryId('');
     setSaving(false);
   }
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
-      <h2 className="text-xl font-bold">Registrar movimiento</h2>
-
       {/* Tipo */}
       <div className="grid grid-cols-2 gap-2">
         <button
@@ -81,6 +78,7 @@ export function TransactionForm({ categories, onSubmit }: Props) {
           onChange={(e) => setAmount(e.target.value)}
           className="w-full bg-surface border border-theme rounded-xl px-4 py-3 text-lg font-semibold text-theme focus:outline-none focus:ring-2 focus:ring-[#22C55E]"
           required
+          autoFocus
         />
       </div>
 
@@ -100,17 +98,6 @@ export function TransactionForm({ categories, onSubmit }: Props) {
             </option>
           ))}
         </select>
-      </div>
-
-      {/* Fecha */}
-      <div>
-        <label className="block text-sm text-muted mb-1.5">Fecha</label>
-        <input
-          type="date"
-          value={date}
-          onChange={(e) => setDate(e.target.value)}
-          className="w-full bg-surface border border-theme rounded-xl px-4 py-3 text-theme focus:outline-none focus:ring-2 focus:ring-[#22C55E]"
-        />
       </div>
 
       {/* Nota */}

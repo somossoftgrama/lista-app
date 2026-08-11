@@ -10,10 +10,11 @@ import { SummaryCards } from '@/components/summary-cards';
 import { BudgetProgress } from '@/components/budget-progress';
 import { CategoryManager } from '@/components/category-manager';
 
-type Tab = 'resumen' | 'registrar' | 'categorias';
+type Tab = 'resumen' | 'categorias';
 
 export default function Home() {
   const [tab, setTab] = useState<Tab>('resumen');
+  const [showForm, setShowForm] = useState(false);
   const [categories, setCategories] = useState<Category[]>([]);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [month, setMonth] = useState<MonthKey>(monthKey(todayISO()));
@@ -46,6 +47,7 @@ export default function Home() {
     const tx: Transaction = { ...data, id: uid(), createdAt: new Date().toISOString() };
     await repo.saveTransaction(tx);
     await load();
+    setShowForm(false);
     setTab('resumen');
   }
 
@@ -95,10 +97,6 @@ export default function Home() {
           </>
         )}
 
-        {tab === 'registrar' && (
-          <TransactionForm categories={categories} onSubmit={handleSaveTransaction} />
-        )}
-
         {tab === 'categorias' && (
           <CategoryManager
             categories={categories}
@@ -108,13 +106,36 @@ export default function Home() {
         )}
       </main>
 
+      {/* Botón flotante para registrar (ingreso/egreso + monto) */}
+      <button
+        onClick={() => setShowForm(true)}
+        className="fixed bottom-20 right-4 z-20 w-14 h-14 rounded-full bg-[#22C55E] text-white text-3xl font-light shadow-lg shadow-black/30 hover:bg-[#16A34A] transition-colors flex items-center justify-center"
+        aria-label="Registrar movimiento"
+      >
+        +
+      </button>
+
+      {/* Modal de registro */}
+      {showForm && (
+        <div className="fixed inset-0 z-30 bg-black/50 flex items-end sm:items-center justify-center p-4" onClick={() => setShowForm(false)}>
+          <div className="w-full max-w-lg bg-app rounded-t-2xl sm:rounded-2xl border border-theme max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+            <div className="flex items-center justify-between px-4 py-3 border-b border-theme">
+              <h2 className="text-lg font-bold">Registrar movimiento</h2>
+              <button onClick={() => setShowForm(false)} className="text-muted text-2xl leading-none hover:text-theme" aria-label="Cerrar">×</button>
+            </div>
+            <div className="p-4">
+              <TransactionForm categories={categories} onSubmit={handleSaveTransaction} />
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Bottom nav (mobile) */}
       <nav className="fixed bottom-0 inset-x-0 z-10 bg-app border-t border-theme backdrop-blur">
-        <div className="max-w-lg mx-auto grid grid-cols-3">
+        <div className="max-w-lg mx-auto grid grid-cols-2">
           {(
             [
               ['resumen', '📊', 'Resumen'],
-              ['registrar', '➕', 'Registrar'],
               ['categorias', '🏷️', 'Categorías'],
             ] as [Tab, string, string][]
           ).map(([key, icon, label]) => (
