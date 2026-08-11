@@ -7,7 +7,6 @@ import { monthKey, todayISO, uid } from '@/lib/types';
 import { TransactionForm } from '@/components/transaction-form';
 import { TransactionList } from '@/components/transaction-list';
 import { SummaryCards } from '@/components/summary-cards';
-import { BudgetProgress } from '@/components/budget-progress';
 import { CategoryManager } from '@/components/category-manager';
 
 type Tab = 'resumen' | 'categorias';
@@ -87,9 +86,6 @@ export default function Home() {
         {tab === 'resumen' && (
           <>
             <SummaryCards transactions={transactions} />
-            <div className="mt-8">
-              <BudgetProgress transactions={transactions} categories={categories} />
-            </div>
             <div className="mt-8">
               <h2 className="text-sm font-semibold text-muted uppercase tracking-wider mb-3">Movimientos del mes</h2>
               <TransactionList transactions={transactions} categories={categories} onDelete={handleDeleteTransaction} />

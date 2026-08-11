@@ -17,7 +17,6 @@ export function CategoryManager({ categories, onSave, onDelete }: Props) {
   const [name, setName] = useState('');
   const [icon, setIcon] = useState('🏷️');
   const [color, setColor] = useState(PALETTE[0]);
-  const [budget, setBudget] = useState('');
   const [saving, setSaving] = useState(false);
 
   function startCreate() {
@@ -25,7 +24,6 @@ export function CategoryManager({ categories, onSave, onDelete }: Props) {
     setName('');
     setIcon('🏷️');
     setColor(PALETTE[0]);
-    setBudget('');
   }
 
   function startEdit(c: Category) {
@@ -33,7 +31,6 @@ export function CategoryManager({ categories, onSave, onDelete }: Props) {
     setName(c.name);
     setIcon(c.icon);
     setColor(c.color);
-    setBudget(c.monthlyBudget ? String(c.monthlyBudget) : '');
   }
 
   async function handleSubmit(e: React.FormEvent) {
@@ -47,7 +44,6 @@ export function CategoryManager({ categories, onSave, onDelete }: Props) {
       icon,
       color,
       isCustom: isEdit ? !categories.find((c) => c.id === editingId)?.id.startsWith('income-') && editingId.startsWith('custom-') : true,
-      monthlyBudget: budget ? parseFloat(budget) : undefined,
     };
     await onSave(cat);
     startCreate();
@@ -85,16 +81,6 @@ export function CategoryManager({ categories, onSave, onDelete }: Props) {
             value={icon}
             onChange={(e) => setIcon(e.target.value)}
             className="w-20 bg-surface border border-theme rounded-xl px-3 py-2 text-center text-theme focus:outline-none focus:ring-2 focus:ring-[#22C55E]"
-          />
-          <input
-            type="number"
-            inputMode="decimal"
-            step="0.01"
-            min="0"
-            placeholder="Presupuesto mensual (opcional)"
-            value={budget}
-            onChange={(e) => setBudget(e.target.value)}
-            className="flex-1 bg-surface border border-theme rounded-xl px-3 py-2 text-theme focus:outline-none focus:ring-2 focus:ring-[#22C55E]"
           />
         </div>
         <div className="flex gap-2 flex-wrap">
@@ -135,8 +121,7 @@ export function CategoryManager({ categories, onSave, onDelete }: Props) {
               <div className="flex-1 min-w-0">
                 <p className="font-medium truncate">{c.name}</p>
                 <p className="text-xs text-muted">
-                  {c.monthlyBudget ? `Presupuesto: $${c.monthlyBudget}` : 'Sin presupuesto'}
-                  {c.isCustom ? ' · Personalizada' : ''}
+                  {c.isCustom ? 'Personalizada' : 'Predeterminada'}
                 </p>
               </div>
             </button>
