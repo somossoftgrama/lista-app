@@ -52,7 +52,7 @@ export function TransactionForm({ categories, onSubmit }: Props) {
           type="button"
           onClick={() => { setType('expense'); setCategoryId(''); }}
           className={`py-3 rounded-xl font-semibold transition-colors ${
-            type === 'expense' ? 'bg-[#EF4444] text-white' : 'bg-white/5 text-white/60'
+            type === 'expense' ? 'bg-[#EF4444] text-white' : 'bg-surface text-muted'
           }`}
         >
           💸 Gasto
@@ -61,7 +61,7 @@ export function TransactionForm({ categories, onSubmit }: Props) {
           type="button"
           onClick={() => { setType('income'); setCategoryId(''); }}
           className={`py-3 rounded-xl font-semibold transition-colors ${
-            type === 'income' ? 'bg-[#22C55E] text-white' : 'bg-white/5 text-white/60'
+            type === 'income' ? 'bg-[#22C55E] text-white' : 'bg-surface text-muted'
           }`}
         >
           💵 Ingreso
@@ -70,7 +70,7 @@ export function TransactionForm({ categories, onSubmit }: Props) {
 
       {/* Monto */}
       <div>
-        <label className="block text-sm text-white/60 mb-1.5">Monto (USD)</label>
+        <label className="block text-sm text-muted mb-1.5">Monto (USD)</label>
         <input
           type="number"
           inputMode="decimal"
@@ -79,23 +79,23 @@ export function TransactionForm({ categories, onSubmit }: Props) {
           placeholder="0.00"
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
-          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-lg font-semibold focus:outline-none focus:ring-2 focus:ring-[#22C55E]"
+          className="w-full bg-surface border border-theme rounded-xl px-4 py-3 text-lg font-semibold text-theme focus:outline-none focus:ring-2 focus:ring-[#22C55E]"
           required
         />
       </div>
 
       {/* Categoría */}
       <div>
-        <label className="block text-sm text-white/60 mb-1.5">Categoría</label>
+        <label className="block text-sm text-muted mb-1.5">Categoría</label>
         <select
           value={categoryId}
           onChange={(e) => setCategoryId(e.target.value)}
-          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-[#22C55E]"
+          className="w-full bg-surface border border-theme rounded-xl px-4 py-3 text-theme focus:outline-none focus:ring-2 focus:ring-[#22C55E]"
           required
         >
           <option value="">Selecciona...</option>
           {available.map((c) => (
-            <option key={c.id} value={c.id} className="bg-[#111]">
+            <option key={c.id} value={c.id} className="bg-surface">
               {c.icon} {c.name}
             </option>
           ))}
@@ -104,24 +104,24 @@ export function TransactionForm({ categories, onSubmit }: Props) {
 
       {/* Fecha */}
       <div>
-        <label className="block text-sm text-white/60 mb-1.5">Fecha</label>
+        <label className="block text-sm text-muted mb-1.5">Fecha</label>
         <input
           type="date"
           value={date}
           onChange={(e) => setDate(e.target.value)}
-          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-[#22C55E]"
+          className="w-full bg-surface border border-theme rounded-xl px-4 py-3 text-theme focus:outline-none focus:ring-2 focus:ring-[#22C55E]"
         />
       </div>
 
       {/* Nota */}
       <div>
-        <label className="block text-sm text-white/60 mb-1.5">Nota (opcional)</label>
+        <label className="block text-sm text-muted mb-1.5">Nota (opcional)</label>
         <input
           type="text"
           placeholder="Ej. Supermercado semanal"
           value={note}
           onChange={(e) => setNote(e.target.value)}
-          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#22C55E]"
+          className="w-full bg-surface border border-theme rounded-xl px-4 py-3 text-theme focus:outline-none focus:ring-2 focus:ring-[#22C55E]"
         />
       </div>
 

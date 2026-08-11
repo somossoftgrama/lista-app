@@ -66,18 +66,18 @@ export default function Home() {
 
   if (!ready) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#0A0A0A] text-white">
-        <p className="text-lg text-white/60">Cargando...</p>
+      <div className="min-h-screen flex items-center justify-center bg-app text-theme">
+        <p className="text-lg text-muted">Cargando...</p>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#0A0A0A] text-white pb-24">
-      <header className="sticky top-0 z-10 backdrop-blur bg-[#0A0A0A]/80 border-b border-white/10 px-4 py-4">
+    <div className="min-h-screen bg-app text-theme pb-24">
+      <header className="sticky top-0 z-10 backdrop-blur bg-app border-b border-theme px-4 py-4">
         <div className="max-w-lg mx-auto flex items-center justify-between">
           <h1 className="text-xl font-bold tracking-tight">💰 Presupuesto</h1>
-          <span className="text-sm text-white/60">{month}</span>
+          <span className="text-sm text-muted">{month}</span>
         </div>
       </header>
 
@@ -89,7 +89,7 @@ export default function Home() {
               <BudgetProgress transactions={transactions} categories={categories} />
             </div>
             <div className="mt-8">
-              <h2 className="text-sm font-semibold text-white/60 uppercase tracking-wider mb-3">Movimientos del mes</h2>
+              <h2 className="text-sm font-semibold text-muted uppercase tracking-wider mb-3">Movimientos del mes</h2>
               <TransactionList transactions={transactions} categories={categories} onDelete={handleDeleteTransaction} />
             </div>
           </>
@@ -109,7 +109,7 @@ export default function Home() {
       </main>
 
       {/* Bottom nav (mobile) */}
-      <nav className="fixed bottom-0 inset-x-0 z-10 bg-[#0A0A0A]/95 border-t border-white/10 backdrop-blur">
+      <nav className="fixed bottom-0 inset-x-0 z-10 bg-app border-t border-theme backdrop-blur">
         <div className="max-w-lg mx-auto grid grid-cols-3">
           {(
             [
@@ -122,7 +122,7 @@ export default function Home() {
               key={key}
               onClick={() => setTab(key)}
               className={`py-3 flex flex-col items-center gap-0.5 text-xs transition-colors ${
-                tab === key ? 'text-[#22C55E]' : 'text-white/50'
+                tab === key ? 'text-[#22C55E]' : 'text-muted'
               }`}
             >
               <span className="text-xl">{icon}</span>

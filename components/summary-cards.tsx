@@ -14,16 +14,16 @@ export function SummaryCards({ transactions }: Props) {
 
   return (
     <div className="grid grid-cols-3 gap-3">
-      <div className="bg-white/5 rounded-2xl p-4">
-        <p className="text-xs text-white/50 mb-1">Ingresos</p>
+      <div className="bg-surface rounded-2xl p-4">
+        <p className="text-xs text-muted mb-1">Ingresos</p>
         <p className="text-lg font-bold text-[#22C55E] truncate">{fmt.format(income)}</p>
       </div>
-      <div className="bg-white/5 rounded-2xl p-4">
-        <p className="text-xs text-white/50 mb-1">Gastos</p>
+      <div className="bg-surface rounded-2xl p-4">
+        <p className="text-xs text-muted mb-1">Gastos</p>
         <p className="text-lg font-bold text-[#EF4444] truncate">{fmt.format(expense)}</p>
       </div>
-      <div className="bg-white/5 rounded-2xl p-4">
-        <p className="text-xs text-white/50 mb-1">Balance</p>
+      <div className="bg-surface rounded-2xl p-4">
+        <p className="text-xs text-muted mb-1">Balance</p>
         <p className={`text-lg font-bold truncate ${balance >= 0 ? 'text-[#22C55E]' : 'text-[#EF4444]'}`}>
           {fmt.format(balance)}
         </p>

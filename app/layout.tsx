@@ -37,7 +37,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="es"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-[#0A0A0A] text-white">
+      <body className="min-h-full flex flex-col bg-app text-theme">
         {children}
         <Script id="register-sw" strategy="afterInteractive">
           {`if ('serviceWorker' in navigator) {
