@@ -1,36 +1,24 @@
-export type Category = {
+export type List = {
   id: string;
   name: string;
-  icon: string;
-  color: string;
-  isCustom: boolean;
-  monthlyBudget?: number;
+  icon: string;          // emoji
+  color: string;         // hex para resaltar
+  createdAt: string;     // ISO timestamp
 };
 
-export type Transaction = {
+export type Item = {
   id: string;
-  type: 'income' | 'expense';
-  amount: number;
-  categoryId: string;
-  date: string; // ISO 'YYYY-MM-DD'
+  listId: string;
+  text: string;
+  done: boolean;
   note?: string;
-  createdAt: string;
+  createdAt: string;     // ISO timestamp
 };
-
-export type MonthKey = string; // 'YYYY-MM'
-
-export function monthKey(dateStr: string): MonthKey {
-  return dateStr.slice(0, 7);
-}
-
-export function todayISO(): string {
-  const d = new Date();
-  const y = d.getFullYear();
-  const m = String(d.getMonth() + 1).padStart(2, '0');
-  const day = String(d.getDate()).padStart(2, '0');
-  return `${y}-${m}-${day}`;
-}
 
 export function uid(): string {
   return `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
+}
+
+export function nowISO(): string {
+  return new Date().toISOString();
 }

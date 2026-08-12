@@ -1,36 +1,37 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Listas
 
-## Getting Started
+App de listas personales (compras, tareas, lo que necesites). Se instala en el teléfono como PWA, funciona offline y guarda todo localmente en el dispositivo.
 
-First, run the development server:
+## Funciones
+
+- Crear varias listas (con ícono y color propios).
+- Añadir ítems a cada lista.
+- Marcar ítems como hechos/pendientes sin borrarlos (el texto se tacha).
+- Editar el texto de un ítem (doble clic o botón ✏️).
+- Borrar ítems o listas completas.
+- Barra de progreso: cuántos ítems van hechos de los totales.
+
+## Arquitectura
+
+- **PWA** sobre Next.js 16 (App Router) + TypeScript + Tailwind CSS v4.
+- **Datos locales** en IndexedDB vía Dexie (`lib/db.ts`).
+- **Capa de repositorio agnóstica** (`lib/repository.ts`): la UI solo conoce la interfaz `ListaRepository`. Si mañana se quiere backend/sincronización, se crea `ApiRepository` con la misma interfaz y se intercambia sin tocar la UI.
+- **Sin servidor ni cuentas**: los datos viven solo en el dispositivo donde se usa la app.
+
+## Desarrollo
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Build
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build
+npm start
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Deploy
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Conectar el repo a Vercel (import manual). Build automático.

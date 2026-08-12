@@ -1,5 +1,5 @@
 /* Service worker minimal: cache de shell para offline básico */
-const CACHE = 'budget-app-v1';
+const CACHE = 'lista-app-v1';
 const SHELL = ['/', '/manifest.webmanifest', '/icon-192.png', '/icon-512.png'];
 
 self.addEventListener('install', (event) => {
@@ -17,7 +17,6 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-  // Solo GET; deja pasar las API (no hay aún) y navegaciones las sirve la red con fallback cache.
   if (event.request.method !== 'GET') return;
   event.respondWith(
     fetch(event.request)

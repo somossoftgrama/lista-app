@@ -1,7 +1,7 @@
 {
-  "name": "Presupuesto",
-  "short_name": "Presupuesto",
-  "description": "App de presupuesto personal: gastos, ingresos y presupuesto mensual por categoría.",
+  "name": "Listas",
+  "short_name": "Listas",
+  "description": "App de listas: compras, tareas y lo que necesites. Marca lo hecho sin borrar.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0A0A0A",

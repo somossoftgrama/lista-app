@@ -14,13 +14,13 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Presupuesto",
-  description: "App de presupuesto personal: gastos, ingresos y presupuesto mensual por categoría.",
+  title: "Listas",
+  description: "App de listas: compras, tareas y lo que necesites. Marca lo hecho sin borrar.",
   manifest: "/manifest.webmanifest",
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
-    title: "Presupuesto",
+    title: "Listas",
   },
 };
 

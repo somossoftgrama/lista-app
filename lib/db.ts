@@ -1,17 +1,17 @@
 import Dexie, { type Table } from 'dexie';
-import type { Category, Transaction } from './types';
+import type { List, Item } from './types';
 
-class BudgetDB extends Dexie {
-  categories!: Table<Category, string>;
-  transactions!: Table<Transaction, string>;
+class ListaDB extends Dexie {
+  lists!: Table<List, string>;
+  items!: Table<Item, string>;
 
   constructor() {
-    super('budget-app');
+    super('lista-app');
     this.version(1).stores({
-      categories: 'id, name',
-      transactions: 'id, type, categoryId, date',
+      lists: 'id, createdAt',
+      items: 'id, listId, done',
     });
   }
 }
 
-export const db = new BudgetDB();
+export const db = new ListaDB();
