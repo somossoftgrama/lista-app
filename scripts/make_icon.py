@@ -19,25 +19,21 @@ def make_icon(size):
     GREEN = (34, 197, 94)      # #22C55E
     GREEN_HI = (74, 222, 128)  # #4ADE80
 
-    # Checkbox redondeado
+    # Checkbox redondeado (caja)
     m = size * 0.24
     box = [m, m, size - m, size - m]
     bw = max(6, int(size * 0.05))
     d.rounded_rectangle(box, radius=size * 0.13, outline=GREEN, width=bw)
 
-    # Checkmark nitido: dos segmentos rectos con vertice agudo
-    lw = max(9, int(size * 0.085))
-    x0 = m + size * 0.20   # inicio abajo-izq
-    y0 = m + size * 0.50
-    x1 = m + size * 0.43   # vertice (punto mas bajo del check)
-    y1 = m + size * 0.70
-    x2 = size - m - size * 0.16  # punta arriba-der
-    y2 = m + size * 0.27
-    # dibujar como poligono relleno para esquina aguda y grosor uniforme
-    # primer segmento
+    # Checkmark DENTRO de la caja (coordenadas como fraccion de size)
+    # La caja va de 0.24 a 0.76; el check se mantiene entre 0.35 y 0.67.
+    lw = max(9, int(size * 0.075))
+    p = lambda fx, fy: (fx * size, fy * size)
+    (x0, y0) = p(0.35, 0.55)   # inicio abajo-izq (dentro)
+    (x1, y1) = p(0.46, 0.65)   # vertice (punto mas bajo, dentro)
+    (x2, y2) = p(0.67, 0.39)   # punta arriba-der (dentro)
     d.line([(x0, y0), (x1, y1)], fill=GREEN_HI, width=lw)
     d.line([(x1, y1), (x2, y2)], fill=GREEN_HI, width=lw)
-    # refuerzo del vertice (circulo pequeño) para que la union sea solida
     r = lw / 2
     d.ellipse([x1 - r, y1 - r, x1 + r, y1 + r], fill=GREEN_HI)
 
